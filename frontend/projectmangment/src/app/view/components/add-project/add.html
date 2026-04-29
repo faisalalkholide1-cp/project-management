@@ -1,0 +1,39 @@
+<div class="form-container">
+  <h2>{{textProject.TITLE_ADD}}</h2>
+
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">{{textProject.TITLE_FORM_NAME}}</label>
+      <input type="text" id="name" formControlName="name" placeholder="{{textProject.PLACEHOLDER_NAME}}" />
+      @if (projectForm.controls.name.invalid && projectForm.controls.name.touched) {
+      <div class="error">
+        @if (projectForm.controls.name.errors?.['required']) {
+        <small>{{textProject.WERRNING_REQUIRED}}</small>
+        } @if (projectForm.controls.name.errors?.['minlength']) {
+        <small>{{textComman.WERRNING_minlength}}</small>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">{{textProject.TITLE_FORM_DESCRIPTION}}</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="4"
+        placeholder="{{textProject.PLACEHOLDER_DESCRIPTION}}"
+      ></textarea>
+      @if (projectForm.controls.description.invalid && projectForm.controls.description.touched) {
+      <div class="error">
+        <small>{{textComman.WERRNING_REQUIRED}}</small>
+      </div>
+      }
+    </div>
+
+    <div class="button-group">
+      <button type="submit" [disabled]="projectForm.invalid">{{textComman.BUTTONN_ADD}}</button>
+      <button type="button" routerLink="/" class="secondary">{{textComman.CANCEL}}</button>
+    </div>
+  </form>
+</div>

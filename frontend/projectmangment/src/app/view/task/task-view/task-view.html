@@ -1,0 +1,68 @@
+<div class="task-container">
+
+  <!-- 🔹 Header + Add Button -->
+ <div class="top-bar">
+  <button class="back-btn" routerLink="/">
+    {{textComman.BACK}}
+  </button>
+
+  <button class="add-btn" [routerLink]="['/add-task', projectId()]">
+  {{textTask.ADD}}
+</button>
+</div> 
+
+  <!-- 🔹 Filters -->
+  <div class="filters">
+  <button [class.active]="filter() === 'all'" (click)="setFilter('all')">{{textTask.Filter_All}}</button>
+  <button [class.active]="filter() === 'active'" (click)="setFilter('active')">{{textTask.Filter_Active}}</button>
+  <button [class.active]="filter() === 'completed'" (click)="setFilter('completed')">{{textTask.Filter_Completed}}</button>
+</div>
+
+  <!-- 🔹 Tasks List -->
+  @if(filteredTasks().length > 0) {
+
+    @for(task of filteredTasks(); track task.id) {
+
+      <div class="task-card">
+
+        <div class="task-header">
+          <h3>{{ task.title }}</h3>
+
+          <span class="badge" [class.done]="task.completed">
+            {{ task.completed ? 'Completed' : 'Active' }}
+          </span>
+        </div>
+
+        <p class="desc">{{ task.description }}</p>
+
+        <small>
+          {{ task.createdAt | date:'shortDate' }}
+        </small>
+
+        <!-- 🔹 Actions -->
+        <div class="actions">
+
+          <button class="toggle-btn" (click)="toggleStatus(task)">
+            {{ task.completed ? 'Mark Active' : 'Mark Done' }}
+          </button>
+
+          <button class="delete-btn" (click)="deleteTask(task.id)">
+            {{textComman.BUTTONN_DELETE}}
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+  } @else {
+
+    <div class="empty">
+    <h3>{{textTask.Found_H3}}</h3>
+    <p>{{textTask.Found_p}}</p>
+  </div>
+
+  }
+
+</div>

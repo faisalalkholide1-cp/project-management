@@ -1,0 +1,10 @@
+# Angular
+node_modules/
+dist/
+.angular/
+
+# PHP
+vendor/
+
+# System
+.DS_Store

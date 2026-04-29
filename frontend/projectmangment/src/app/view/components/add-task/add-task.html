@@ -1,0 +1,51 @@
+<div class="form-container">
+
+  <h2>{{textTask.TITLE_ADD}}</h2>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>{{textTask.TITLE_FORM_TITLE}}</label>
+      <input type="text"  formControlName="title" placeholder="Enter Task Title">
+      @if (taskForm.controls.title.invalid && taskForm.controls.title.touched) {
+      <div class="error">
+        @if (taskForm.controls.title.errors?.['required']) {
+        <small>{{textTask.WERRNING_REQUIRED}}</small>
+        } @if (taskForm.controls.title.errors?.['minlength']) {
+        <small>{{textComman.WERRNING_minlength}}</small>
+        }
+      </div>
+      }
+      
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="4"
+        placeholder="Enter Task description"
+      ></textarea>
+      @if (taskForm.controls.description.invalid && taskForm.controls.description.touched) {
+      <div class="error">
+        <small>{{textComman.WERRNING_REQUIRED}}</small>
+      </div>
+      }
+    </div>
+
+    <div class="button-group">
+
+      <button type="submit" [disabled]="taskForm.invalid" class="save-btn">
+        {{textComman.SAVE}}
+      </button>
+
+      <button type="button"  [routerLink]="['/task', projectId()]" class="cancel-btn">
+        {{textComman.CANCEL}}
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,17 @@
+<div class="app-container">
+  <nav class="navbar">
+    <div class="nav-brand">
+      <h2>{{texts.APP_TITLE}}</h2>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/">{{texts.NAV_LINKS_HOME}}</a>
+      <a routerLink="/add">{{texts.NAV_LINKS_NEW}}</a>
+    </div>
+  </nav>
+  <main>
+    <router-outlet />
+  </main>
+  <footer>
+    <p>Project Manager &copy; 2026</p>
+  </footer>
+</div>
