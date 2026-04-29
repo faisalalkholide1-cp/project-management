@@ -36,3 +36,6 @@ The system allows managing projects and their related tasks with full CRUD opera
 - MySQL database
 - Prepared Statements for security
 - JSON responses
+### Projects Page
+![Project](screenshot/projectHome.png)
+
