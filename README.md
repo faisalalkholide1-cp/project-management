@@ -37,5 +37,5 @@ The system allows managing projects and their related tasks with full CRUD opera
 - Prepared Statements for security
 - JSON responses
 ### Projects Page
-![Project](screenshot/projectHome.png)
+![Project](Screenshot/projectHome.png)
 
