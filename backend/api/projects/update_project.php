@@ -2,8 +2,6 @@
 
 include "../connect.php";
 
-header("Content-Type: application/json");
-
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($data['id'], $data['name'], $data['description'])) {
@@ -25,7 +23,7 @@ if ($id <= 0 || $name === '' || $description === '') {
     ]);
     exit();
 }
-
+try{
 $stmt = $con->prepare("
     UPDATE projects 
     SET name = ?, description = ? 
@@ -42,3 +40,9 @@ echo json_encode([
 
 $stmt->close();
 $con->close();
+
+}catch(Ex $e){
+    echo json_encode([
+    "status" =>  $e
+]);
+}

@@ -2,7 +2,6 @@
 
 include "../connect.php";
 
-header("Content-Type: application/json");
 
 if (!isset($_GET['id'])) {
     echo json_encode([
@@ -21,6 +20,8 @@ if ($id <= 0) {
     ]);
     exit();
 }
+try{
+
 
 $stmt = $con->prepare("DELETE FROM projects WHERE id = ?");
 $stmt->bind_param("i", $id);
@@ -33,3 +34,9 @@ echo json_encode([
 
 $stmt->close();
 $con->close();
+
+}catch(Ex $e){
+    echo json_encode([
+    "status" =>  $e
+]);
+}

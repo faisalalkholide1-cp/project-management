@@ -19,7 +19,7 @@ if ($id <= 0 || ($completed !== 0 && $completed !== 1)) {
     echo json_encode(["error" => "Invalid input"]);
     exit();
 }
-
+try{
 $stmt = $con->prepare("UPDATE tasks SET completed = ? WHERE id = ?");
 
 if (!$stmt) {
@@ -39,3 +39,6 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $con->close();
+}catch(Ex $e){
+    echo json_encode(["error" => $e]);
+}

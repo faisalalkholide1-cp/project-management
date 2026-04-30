@@ -2,7 +2,6 @@
 
 include "../connect.php";
 
-header("Content-Type: application/json");
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -27,7 +26,8 @@ if ($project_id <= 0 || $title === '' || $description === '') {
     ]);
     exit();
 }
-
+try{
+    
 $stmt = $con->prepare("
     INSERT INTO tasks (project_id, title, description) 
     VALUES (?, ?, ?)
@@ -43,3 +43,8 @@ echo json_encode([
 
 $stmt->close();
 $con->close();
+}catch(Ex $e){
+    echo json_encode([
+    "status" => $e
+]);
+}

@@ -19,7 +19,8 @@ if ($id <= 0) {
     ]);
     exit();
 }
-
+try{
+    
 $stmt = $con->prepare("SELECT * FROM projects WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -28,4 +29,8 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
 echo json_encode($row);
+
+}catch(Ex $e){
+    echo json_encode($e);
+}
 ?>
