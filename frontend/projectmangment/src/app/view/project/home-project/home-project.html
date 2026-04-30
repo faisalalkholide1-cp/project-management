@@ -1,24 +1,28 @@
 
-<div class="task">
+<div class="project">
 @if (projects().length === 0) {
         <div class="empty">
             <p>{{textProject.found}}</p>
         </div>
 }
 @for(project of projects(); track project.id){
-    <div class="task-item">
+    <div class="project-item">
         <div class="task-content">
             <h3>
-                <a [routerLink]="['/task', project.id]">{{project.name}}</a>
+                {{project.name}}
+                <!-- <a [routerLink]="['/task', project.id]">{{project.name}}</a> -->
             </h3>
             <P>{{project.description}}</P>
             <small>{{textComman.Created}}: {{project.createdAt.toLocaleDateString()}}</small>
         </div>
          <div class="button-group">
+             <button class="open-btn" [routerLink]="['/task', project.id]">
+                Open
+            </button>
+            <button class="edit-btn" [routerLink]="['/edit-project', project.id]">
+                Edit
+            </button>
             <button class="delete-btn" (click)="deleteProject(project.id)">{{textComman.BUTTONN_DELETE}}</button>
-         <button class="edit-btn" [routerLink]="['/edit-project', project.id]">
-            Edit
-        </button>
          </div>
     </div>
 }

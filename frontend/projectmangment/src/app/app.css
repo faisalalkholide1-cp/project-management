@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  
 }
 
 .navbar {
@@ -61,4 +62,17 @@ footer {
 
 footer p {
   margin: 0;
+}
+
+@media (max-width: 600px) {
+  .nav-brand h2 {
+    font-size: 15px;
+  font-weight: 500;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    padding: 6px 13px;
+    color: hsl(0, 0%, 1%);
+  }
 }

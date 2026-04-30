@@ -19,7 +19,10 @@ export const TEXTSTASK = {
         Found_H3:'No Tasks Found',
         Found_p:'Add your first task to start working',
         WERRNING_REQUIRED:'Title is required', 
-        WERRNING_minlength:''
+        WERRNING_minlength:'',
+        Total_Tasks: 'Total Tasks',
+        Active_Tasks: 'Active Tasks',
+        Completed_Tasks: 'Completed Tasks'
 
     
 }

@@ -1,26 +1,10 @@
-.task-detail-container {
+/* .task-detail-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-}
+} */
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-  color: #111827;
-}
-
-.status-badge {
+.badge {
   padding: 5px 12px;
   border-radius: 999px;
   background: #fbbf24;
@@ -29,7 +13,7 @@
   font-weight: 600;
 }
 
-.status-badge.completed {
+.badge.done {
   background: #22c55e;
   color: white;
 }
@@ -211,18 +195,6 @@ button:hover {
   font-size: 14px;
 }
 
-
-@media (max-width: 600px) {
-  .top-bar {
-    flex-direction: column;
-    gap: 10px;
-    align-items: stretch;
-  }
-
-  .filters {
-    justify-content: center;
-  }
-}
 .stats {
   display: flex;
   gap: 12px;
@@ -256,3 +228,15 @@ button:hover {
 .active p { color: #0d6efd; }
 .completed p { color: #198754; }
 .total p { color: #333; }
+
+@media (max-width: 600px) {
+  .top-bar {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .filters {
+    justify-content: center;
+  }
+}

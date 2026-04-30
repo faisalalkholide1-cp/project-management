@@ -1,18 +1,18 @@
 <div class="task-container">
  <div class="stats">
 
-  <div class="card total">
-    <h3>Total Tasks</h3>
+  <div class="card total">  
+    <h3>{{textTask.Total_Tasks}}</h3>
     <p>{{ taskService.totalTasks() }}</p>
   </div>
 
   <div class="card active">
-    <h3>Active Tasks</h3>
+    <h3>{{textTask.Active_Tasks}}</h3>
     <p>{{ taskService.activeTasksCount() }}</p>
   </div>
 
   <div class="card completed">
-    <h3>Completed Tasks</h3>
+    <h3>{{textTask.Completed_Tasks}}</h3>
     <p>{{ taskService.completedTasksCount() }}</p>
   </div>
 
