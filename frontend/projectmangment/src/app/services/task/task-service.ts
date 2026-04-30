@@ -65,4 +65,18 @@ export class TaskService {
     getTask(id: number) {
       return this.tasksSignal().find(task => task.id === id);
     }
+
+    totalTasks = computed(() =>
+      this.tasksSignal().length
+    );
+
+    completedTasksCount = computed(() =>
+      this.tasksSignal().filter(t => t.completed).length
+    );
+
+    activeTasksCount = computed(() =>
+      this.tasksSignal().filter(t => !t.completed).length
+    );
+
+    
 }

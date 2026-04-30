@@ -1,44 +1,49 @@
 <div class="form-container">
 
-  <h2>Edit Project</h2>
-
-  @if(loading()) {
-    <p>Loading...</p>
-  } @else {
+  <h2>{{textProject.EDIT}}</h2>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
       <div class="form-group">
-        <label>Project Name</label>
-        <input type="text" formControlName="name">
+        <label>{{textProject.TITLE_FORM_NAME}}</label>
+        <input type="text" formControlName="name" placeholder="{{textProject.PLACEHOLDER_NAME}}">
+        @if (form.controls.name.invalid && form.controls.name.touched) {
+      <div class="error">
+        @if (form.controls.name.errors?.['required']) {
+        <small>{{textProject.WERRNING_REQUIRED}}</small>
+        } @if (form.controls.name.errors?.['minlength']) {
+        <small>{{textComman.WERRNING_minlength}}</small>
+        }
+      </div>
+      }
       </div>
 
       <div class="form-group">
-        <label>Description</label>
-        <textarea formControlName="description"></textarea>
+        <label>{{textProject.TITLE_FORM_DESCRIPTION}}</label>
+        <textarea formControlName="description" placeholder="{{textProject.PLACEHOLDER_DESCRIPTION}}"></textarea>
+        @if (form.controls.description.invalid && form.controls.description.touched) {
+      <div class="error">
+        <small>{{textComman.WERRNING_REQUIRED}}</small>
+      </div>
+      }
       </div>
 
       <div class="button-group">
         <button 
             type="submit" 
             class="save-btn"
-            [disabled]="form.invalid || loading()">
-
-            @if(loading()) {
-                Saving...
-            } @else {
-                Update
-            }
+            [disabled]="form.invalid">
+            {{textComman.SAVE}}
 
             </button>
 
         <button type="button" routerLink="/" class="cancel-btn">
-          Cancel
+          {{textComman.CANCEL}}
         </button>
       </div>
 
     </form>
 
-  }
+  
 
 </div>

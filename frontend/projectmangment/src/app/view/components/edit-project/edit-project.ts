@@ -3,6 +3,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProjectService } from '../../../services/project/project-service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TEXTSPROJECT } from '../../../constants/texts-project';
+import { TEXTSCOMMAN } from '../../../constants/text-common';
 
 @Component({
   selector: 'app-edit-project',
@@ -16,9 +18,10 @@ export class EditProject implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private projectService = inject(ProjectService);
+  textProject = TEXTSPROJECT;
+  textComman = TEXTSCOMMAN;
 
   projectId = signal<number>(0);
-  loading = signal<boolean>(false);
 
   form = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -37,7 +40,6 @@ export class EditProject implements OnInit {
   }
 
   loadProject(id: number) {
-    this.loading.set(true);
 
     this.projectService.getProjectById(id).subscribe({
       next: (res: any) => {
@@ -45,10 +47,8 @@ export class EditProject implements OnInit {
           name: res.name,
           description: res.description
         });
-        this.loading.set(false);
       },
       error: () => {
-        this.loading.set(false);
         this.router.navigate(['/']);
       }
     });
@@ -57,7 +57,6 @@ export class EditProject implements OnInit {
   onSubmit() {
   if (this.form.invalid) return;
 
-  this.loading.set(true);
 
   const { name, description } = this.form.value;
 
@@ -73,12 +72,10 @@ export class EditProject implements OnInit {
         panelClass: ['snackbar-success']
       });
 
-      this.loading.set(false);
       this.router.navigate(['/']);
     },
 
     error: () => {
-      this.loading.set(false);
 
       this.snackBar.open('Something went wrong ❌', 'Close', {
         duration: 3000,

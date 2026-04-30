@@ -2,7 +2,7 @@ export const TEXTSPROJECT = {
     
     TITLE:'', 
     ADD:  '',
-    EDIT: '',
+    EDIT: 'Edit Project',
     TITLE_ADD :'Add New Project',
     TITLE_FORM_NAME :'Project Name',
     TITLE_FORM_DESCRIPTION :'Description',
@@ -11,5 +11,6 @@ export const TEXTSPROJECT = {
     CANCEL:'',
     found:'No project found. Add one to get started!' , 
     WERRNING_REQUIRED:'Name is required',
+
     
 }
