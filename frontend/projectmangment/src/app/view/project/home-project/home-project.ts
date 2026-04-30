@@ -29,13 +29,15 @@ export class HomeProject {
   ngOnInit() {
     this.projectService.loadProject(); 
   }
+
+
   deleteProject(id: number) {
   const dialogRef = this.dialog.open(ConfirmDialog);
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
 
-      this.projectService.deleteTask(id).subscribe({
+      this.projectService.deleteProject(id).subscribe({
     next: () => {
 
       this.snackBar.open('Project deleted successfully 🗑️', 'Close', {
@@ -57,4 +59,6 @@ export class HomeProject {
     }
   });
 }
+
+
 }

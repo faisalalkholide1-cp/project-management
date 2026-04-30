@@ -41,22 +41,24 @@ export class EditProject implements OnInit {
 
   loadProject(id: number) {
 
-    this.projectService.getProjectById(id).subscribe({
-      next: (res: any) => {
-        this.form.patchValue({
-          name: res.name,
-          description: res.description
-        });
-      },
-      error: () => {
-        this.router.navigate(['/']);
-      }
-    });
-  }
+  this.projectService.getProjectById(id).subscribe({
+    next: (project) => {
+
+      this.form.patchValue({
+        name: project.name,
+        description: project.description
+      });
+
+    },
+    error: () => {
+      this.router.navigate(['/']);
+    }
+  });
+
+}
 
   onSubmit() {
   if (this.form.invalid) return;
-
 
   const { name, description } = this.form.value;
 
@@ -65,14 +67,25 @@ export class EditProject implements OnInit {
     name!,
     description!
   ).subscribe({
-    next: () => {
+    next: (res) => {
 
-      this.snackBar.open('Project updated successfully ✅', 'Close', {
-        duration: 3000,
-        panelClass: ['snackbar-success']
-      });
+      if (res.status === 'success') {
 
-      this.router.navigate(['/']);
+        this.snackBar.open('Project updated successfully ✅', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-success']
+        });
+
+        this.router.navigate(['/']);
+
+      } else {
+
+        this.snackBar.open('Update failed ❌', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error']
+        });
+
+      }
     },
 
     error: () => {
@@ -81,6 +94,7 @@ export class EditProject implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-error']
       });
+
     }
   });
 }

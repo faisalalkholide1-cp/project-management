@@ -7,7 +7,7 @@ import { TaskModel } from '../../models/task-model';
 })
 export class TaskService {
     private http = inject(HttpClient);
-    private api = 'http://localhost:81/api/task/';
+    private api = 'http://localhost:81/api/task/tasks.php';
 
     tasksSignal = signal<TaskModel[]>([]);
     tasks = this.tasksSignal.asReadonly();
@@ -21,10 +21,13 @@ export class TaskService {
     );
 
     loadTasksByProject(projectId: number) {
-    this.http.get<any[]>(`${this.api}get_tasks.php?project_id=${projectId}`)
-      .subscribe(data => {
+      this.http.get<{ status: string; data: any[] }>(
+        `${this.api}?project_id=${projectId}`
+      ).subscribe(res => {
 
-        const tasks = data.map(item => ({
+        if (res.status !== 'success') return;
+
+        const tasks = res.data.map(item => ({
           id: Number(item.id),
           projectId: Number(item.project_id),
           title: item.title,
@@ -35,31 +38,33 @@ export class TaskService {
 
         this.tasksSignal.set(tasks);
       });
-   }
+    }
 
     //  إضافة مهمة
     addTask(title: string, description: string, projectId: number) {
-    return this.http.post(this.api + 'add_task.php', {
-      title,
-      description,
-      project_id: projectId
-    });
-  }
+      return this.http.post<{ status: string }>(this.api, {
+        title,
+        description,
+        project_id: projectId
+      });
+    }
 
     //  حذف مهمة
-      deleteTask(id: number) {
-    return this.http.get(this.api + `delete_task.php?id=${id}`);
-  }
+    deleteTask(id: number) {
+      return this.http.delete<{ status: string }>(
+        `${this.api}?id=${id}`
+      );
+    }
 
 
 
     //  تغيير حالة المهمة
-  toggleTaskStatus(task: any) {
-    return this.http.post(this.api + 'update_task.php', {
-      id: task.id,
-      completed: task.completed ? 0 : 1
-    });
-  }
+    toggleTaskStatus(task: any) {
+      return this.http.put<{ status: string }>(this.api, {
+        id: task.id,
+        completed: task.completed ? 0 : 1
+      });
+    }
 
     //  جلب مهمة واحدة
     getTask(id: number) {
