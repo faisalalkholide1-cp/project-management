@@ -39,3 +39,6 @@ The system allows managing projects and their related tasks with full CRUD opera
 ### Projects Page
 ![Project](Screenshot/projectHome.png)
 
+### Projects Page
+![Project](Screenshot/taskView.png)
+
