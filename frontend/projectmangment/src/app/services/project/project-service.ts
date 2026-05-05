@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProjectService {
     private http = inject(HttpClient);
-    private api = 'http://localhost:81/api/projects/projects.php';
+    private api = 'http://localhost:81/api_angular/projects/projects.php';
 
     projectSignal = signal<ProjectModel[]>([]);
     project = this.projectSignal.asReadonly();

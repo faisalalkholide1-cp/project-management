@@ -7,7 +7,7 @@ import { TaskModel } from '../../models/task-model';
 })
 export class TaskService {
     private http = inject(HttpClient);
-    private api = 'http://localhost:81/api/task/tasks.php';
+    private api = 'http://localhost:81/api_angular/task/tasks.php';
 
     tasksSignal = signal<TaskModel[]>([]);
     tasks = this.tasksSignal.asReadonly();
